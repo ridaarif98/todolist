@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <title>To Do List</title>
 <script defer src="bundle.js"></script></head>
 <body>
-    <h1>Hello</h1>
+    <div class="maindiv">    
+        <ul class="mainList"> 
+            <li>
+                <ul class="repeatList">
+                    <li class="firstItem">Today's To Do</li>
+                    <li class="formItem">
+                    <form id="addTodo">
+                         <input type="text" id="todotitle" placeholder="Add to your list...">
+                         <button type="submit" id="btn"> <i class="fa fa-arrow-down"></i></button> 
+                    </form>
+                   </li>
+                   
+                </ul>
+            </li>
+            <li>
+                <ul class="repeatList" id="showListItem">     
+                </ul>    
+            </li>
+        </ul>  
+        <button type="button" class="clearBtn" id="clearButton">Clear All Completed</button>
+    </div>
 </body>
 </html>

@@ -8,15 +8,18 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devServer: {
+    contentBase: './dist',
+  },
   plugins: [new HtmlWebpackPlugin({
     template: './src/index.html',
   })],
   module: {
-       rules: [
-          {
-           test: /\.css$/i,
-           use: ['style-loader', 'css-loader'],
-          },
-        ],
-   },
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };
