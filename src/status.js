@@ -16,27 +16,24 @@ let collection = [
   },
 ];
 
-function statusCheck(ev) {
+const statusCheck = ((ev) => {
   const buttonId = ev.target.id;
-  console.log(buttonId);
   const dataGet = localStorage.getItem('todoList');
   const data = JSON.parse(dataGet);
   if (data) {
     collection = data;
   }
   const rtest = collection[collection.findIndex((x) => x.id === parseInt(buttonId, 10))];
-  console.log(rtest);
   const last = collection.indexOf(rtest);
-  console.log(last);
   if (collection[last].completed === false) {
     collection[last].completed = true;
   } else {
     collection[last].completed = false;
   }
   localStorage.setItem('todoList', JSON.stringify(collection));
-}
+});
 
-function ShowList(arr) {
+const ShowList = ((arr) => {
   localStorage.setItem('todoList', JSON.stringify(collection));
   const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
@@ -48,7 +45,7 @@ function ShowList(arr) {
       </ul>
      `).join('');
   document.getElementById('showListItem').innerHTML = `${listToDo}`;
-}
+});
 
 window.addEventListener('load', () => {
   const dataGet = localStorage.getItem('todoList');
