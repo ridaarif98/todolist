@@ -1,3 +1,5 @@
+import addEventsDragAndDrop from './draging.js';
+
 let collection = [
   {
     description: 'Reading',
@@ -45,6 +47,10 @@ const ShowList = ((arr) => {
       </ul>
      `).join('');
   document.getElementById('showListItem').innerHTML = `${listToDo}`;
+  const test = document.querySelectorAll('.testList1');
+  test.forEach((li) => {
+    addEventsDragAndDrop(li);
+  });
 });
 
 window.addEventListener('load', () => {
