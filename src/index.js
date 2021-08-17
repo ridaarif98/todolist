@@ -1,33 +1,40 @@
 import './style.css';
 
-let collection = [];
-const form = document.getElementById('addTodo');
+let collection = [
+  {
+    description: 'Reading',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'Preparation for test',
+    completed: false,
+    index: 2,
+  },
+  {
+    description: 'Project',
+    completed: false,
+    index: 3,
+  },
+];
+
+localStorage.setItem('todoList', JSON.stringify(collection));
 
 function ShowList(arr) {
   const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
-          <li><input type="checkbox" id='${b.id}' value='${b.complete}' class="checkboX">
-          <p>${b.title}</p>
+          <li><input type="checkbox" id='${b.index}' value='${b.completed}' class="checkboX">
+          <p>${b.description}</p>
           </li>
-          <i class=" fa fa-ellipsis-v" id='${b.id}'></i>
-          <i class="fa fa-trash-o" id='${b.id}'></i>          
+          <i class=" fa fa-ellipsis-v" id='${b.index}'></i>
+          <i class="fa fa-trash-o" id='${b.index}'></i>          
       </ul>
      `).join('');
   document.getElementById('showListItem').innerHTML = `${listToDo}`;
 }
 
-function addList() {
-  const todo = {
-    id: collection.length,
-    title: document.getElementById('todotitle').value,
-    complete: false,
-  };
-  collection.push(todo);
-  localStorage.setItem('todoList', JSON.stringify(collection));
-  if (collection.length > 0) {
-    ShowList(collection);
-  }
-  form.reset();
+if (collection.length > 0) {
+  ShowList(collection);
 }
 
 window.addEventListener('load', () => {
@@ -39,9 +46,4 @@ window.addEventListener('load', () => {
   if (collection.length > 0) {
     ShowList(collection);
   }
-});
-
-form.addEventListener('submit', (ev) => {
-  ev.preventDefault();
-  addList();
 });
