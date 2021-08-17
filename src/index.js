@@ -4,7 +4,7 @@ let collection = [];
 const form = document.getElementById('addTodo');
 
 function ShowList(arr) {
-    const listToDo = arr.map((b) => `
+  const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
           <li><input type="checkbox" id='${b.id}' value='${b.complete}' class="checkboX">
           <p>${b.title}</p>
@@ -44,4 +44,4 @@ window.addEventListener('load', () => {
 form.addEventListener('submit', (ev) => {
   ev.preventDefault();
   addList();
-})
+});
