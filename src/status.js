@@ -1,5 +1,23 @@
-let collection = [];
-const form = document.getElementById('addTodo');
+let collection = [
+    {
+      description: 'Reading',
+      completed: false,
+      id: 1,
+    },
+    {
+      description: 'Preparation for test',
+      completed: false,
+      id: 2,
+    },
+    {
+      description: 'Project',
+      completed: false,
+      id: 3,
+    },
+  ];
+
+
+// const form = document.getElementById('addTodo');
 
 function statusCheck(ev) {
     const buttonId = ev.target.id;
@@ -23,6 +41,7 @@ function statusCheck(ev) {
   
 
 function ShowList(arr) {
+    localStorage.setItem('todoList', JSON.stringify(collection));
     const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
           <li><input type="checkbox" id='${b.id}' value='${b.completed}' class="checkboX" ${b.completed ? 'checked' : 'unchecked'}>
@@ -35,21 +54,21 @@ function ShowList(arr) {
   document.getElementById('showListItem').innerHTML = `${listToDo}`;
 }
 
-function addList() {
-    const todo = {
-      id: collection.length,
-      description: document.getElementById('todotitle').value,
-      completed: false,
-    };
-    collection.push(todo);
-    localStorage.setItem('todoList', JSON.stringify(collection));
-    if (collection.length > 0) {
-      ShowList(collection);
-    }
-    form.reset();
-  }
+// function addList() {
+//     const todo = {
+//       id: collection.length,
+//       description: document.getElementById('todotitle').value,
+//       completed: false,
+//     };
+//     collection.push(todo);
+//     localStorage.setItem('todoList', JSON.stringify(collection));
+//     if (collection.length > 0) {
+//       ShowList(collection);
+//     }
+//     form.reset();
+//   }
 
-  window.addEventListener('load', () => {
+window.addEventListener('load', () => {
     const dataGet = localStorage.getItem('todoList');
     const data = JSON.parse(dataGet);
     if (data) {
@@ -60,4 +79,4 @@ function addList() {
     }
   });
   
-  export{ addList, statusCheck };
+export{ statusCheck };
