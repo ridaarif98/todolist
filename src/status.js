@@ -64,4 +64,4 @@ window.addEventListener('load', () => {
   }
 });
 
-export { statusCheck };
+export default statusCheck;
