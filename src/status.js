@@ -63,5 +63,5 @@ window.addEventListener('load', () => {
     ShowList(collection);
   }
 });
-  
-export{ statusCheck };
+
+export { statusCheck };
