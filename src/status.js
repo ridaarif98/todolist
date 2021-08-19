@@ -88,6 +88,12 @@ const removeTodo = ((ev) => {
   ShowList(collection);
 });
 
+const removeCompleted = (() => {
+  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id }));
+  localStorage.setItem('todoList', JSON.stringify(collection));
+  ShowList(collection);
+});
+
 window.addEventListener('load', () => {
   const dataGet = localStorage.getItem('todoList');
   const data = JSON.parse(dataGet);
@@ -99,4 +105,4 @@ window.addEventListener('load', () => {
   }
 });
 
-export { statusCheck, addToList, editTask, removeTodo } ;
+export { statusCheck, addToList, editTask, removeTodo, removeCompleted } ;
