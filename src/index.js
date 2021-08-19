@@ -1,10 +1,17 @@
 import './style.css';
-import { statusCheck,addToList } from './status.js';
+import { statusCheck,addToList ,removeTodo } from './status.js';
 const form = document.getElementById('addTodo');
+const showList = document.getElementById('showListItem');
 
-document.getElementById('showListItem').addEventListener('click', (e) => {
+showList.addEventListener('click', (e) => {
   if (e.target.classList.contains('checkboX')) {
     statusCheck(e);
+  }
+});
+
+showList.addEventListener('click', (e) => {
+  if(e.target.classList.contains('fa-trash-o')) {
+    removeTodo(e);
   }
 });
 

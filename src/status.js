@@ -51,6 +51,18 @@ const addToList = (() => {
   form.reset();
 });
 
+const removeTodo = ((ev) => {
+  const buttonId = ev.target.id;
+  collection = collection.filter(
+    (y) => y !== collection[collection.findIndex(
+      (x) => x.id === parseInt(buttonId, 10),
+    )],
+  );
+  collection = collection.map((el, id) => ({ ...el, id }));
+  localStorage.setItem('todoList', JSON.stringify(collection));
+  ShowList(collection);
+});
+
 window.addEventListener('load', () => {
   const dataGet = localStorage.getItem('todoList');
   const data = JSON.parse(dataGet);
@@ -62,4 +74,4 @@ window.addEventListener('load', () => {
   }
 });
 
-export { statusCheck, addToList } ;
+export { statusCheck, addToList, removeTodo } ;
