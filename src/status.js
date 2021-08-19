@@ -39,7 +39,7 @@ const ShowList = ((arr) => {
 
 const addToList = (() => {
   const toDoTask = {
-    id: collection.length+1,
+    id: collection.length,
     description: document.getElementById('todotitle').value,
     completed: false,
   };
@@ -71,14 +71,17 @@ const editTask = ((ev) => {
   collection[last].description = editInput.innerHTML;
 
   editInput.addEventListener('keyup', () => {
-    if(editInput.innerHTML.length > 0) {
+    if (editInput.innerHTML.length > 0) {
+      const listItem = document.getElementById('showListItem');
+      const errorMsg = listItem.querySelector('small');
+      errorMsg.style.display = 'none';
       collection[last].description = editInput.innerHTML;
       localStorage.setItem('todoList', JSON.stringify(collection));
     } else if (editInput.innerHTML.length === 0) {
       const listItem = document.getElementById('showListItem');
       const errorMsg = listItem.querySelector('small');
       errorMsg.style.display = 'block';
-      errorMsg.innerText = "Please enter some text";
+      errorMsg.innerText = 'Please enter some text';
       errorMsg.classList.add('small');
     }
   });
@@ -91,13 +94,13 @@ const removeTodo = ((ev) => {
       (x) => x.id === parseInt(buttonId, 10),
     )],
   );
-  collection = collection.map((el, id) => ({ ...el, id}));
+  collection = collection.map((el, id) => ({ ...el, id }));
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });
 
 const removeCompleted = (() => {
-  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id}));
+  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id }));
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });
