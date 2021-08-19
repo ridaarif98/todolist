@@ -51,6 +51,31 @@ const addToList = (() => {
   form.reset();
 });
 
+const editTask = ((ev) => {
+  const buttonID = ev.target.id;
+  const dataGet = localStorage.getItem('todoList');
+  const data = JSON.parse(dataGet);
+  if (data) {
+    collection = data;
+  }
+  const btnId = collection[collection.findIndex((x) => x.id === parseInt(buttonID, 10))];
+  const last = collection.indexOf(btnId);
+  const test = ev.target.parentNode;
+  const editInput = test.querySelector('p');
+  editInput.contentEditable = true;
+  editInput.classList.add('test');
+  const a = test.querySelector('.fa-ellipsis-v');
+  a.style.display = 'none';
+  const b = test.querySelector('.fa-trash-o');
+  b.style.display = 'block';
+  collection[last].description = editInput.innerHTML;
+
+  editInput.addEventListener('keyup', () => {
+    collection[last].description = editInput.innerHTML;
+    localStorage.setItem('todoList', JSON.stringify(collection));
+  });
+});
+
 const removeTodo = ((ev) => {
   const buttonId = ev.target.id;
   collection = collection.filter(
@@ -74,4 +99,4 @@ window.addEventListener('load', () => {
   }
 });
 
-export { statusCheck, addToList, removeTodo } ;
+export { statusCheck, addToList, editTask, removeTodo } ;
