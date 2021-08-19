@@ -10,7 +10,7 @@ const statusCheck = ((ev) => {
   if (data) {
     collection = data;
   }
-  const rtest = collection[collection.findIndex((x) => x.id === parseInt(buttonId, 10))];
+  const rtest = collection[collection.findIndex((x) => x.index === parseInt(buttonId, 10))];
   const last = collection.indexOf(rtest);
   if (collection[last].completed === false) {
     collection[last].completed = true;
@@ -23,11 +23,11 @@ const statusCheck = ((ev) => {
 const ShowList = ((arr) => {
   const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
-          <li><input type="checkbox" id='${b.id}' value='${b.completed}' class="checkboX" ${b.completed ? 'checked' : 'unchecked'}>
+          <li><input type="checkbox" id='${b.index}' value='${b.completed}' class="checkboX" ${b.completed ? 'checked' : 'unchecked'}>
           <p>${b.description}</p><small></small>
           </li>
-          <i class=" fa fa-ellipsis-v" id='${b.id}'></i>
-          <i class="fa fa-trash-o" id='${b.id}'></i>          
+          <i class=" fa fa-ellipsis-v" id='${b.index}'></i>
+          <i class="fa fa-trash-o" id='${b.index}'></i>          
       </ul>
      `).join('');
   document.getElementById('showListItem').innerHTML = `${listToDo}`;
@@ -39,7 +39,7 @@ const ShowList = ((arr) => {
 
 const addToList = (() => {
   const toDoTask = {
-    id: collection.length,
+    index: collection.length + 1,
     description: document.getElementById('todotitle').value,
     completed: false,
   };
@@ -58,7 +58,7 @@ const editTask = ((ev) => {
   if (data) {
     collection = data;
   }
-  const btnId = collection[collection.findIndex((x) => x.id === parseInt(buttonID, 10))];
+  const btnId = collection[collection.findIndex((x) => x.index === parseInt(buttonID, 10))];
   const last = collection.indexOf(btnId);
   const test = ev.target.parentNode;
   const editInput = test.querySelector('p');
@@ -91,16 +91,22 @@ const removeTodo = ((ev) => {
   const buttonId = ev.target.id;
   collection = collection.filter(
     (y) => y !== collection[collection.findIndex(
-      (x) => x.id === parseInt(buttonId, 10),
+      (x) => x.index === parseInt(buttonId, 10),
     )],
   );
-  collection = collection.map((el, id) => ({ ...el, id }));
+  collection = collection.map((el) => ({ ...el }));
+  for ( let i = 0; i < collection.length; i++) {
+    collection[i].index = i + 1;
+  }
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });
 
 const removeCompleted = (() => {
-  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id }));
+  collection = collection.filter((y) => !y.completed).map((y) => ({ ...y }));
+  for (let i = 0; i < collection.length; i++) {
+    collection[i].index = i + 1;
+  }
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });
