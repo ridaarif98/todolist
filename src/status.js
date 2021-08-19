@@ -24,7 +24,7 @@ const ShowList = ((arr) => {
   const listToDo = arr.map((b) => `
     <ul class="testList1" draggable="true">
           <li><input type="checkbox" id='${b.id}' value='${b.completed}' class="checkboX" ${b.completed ? 'checked' : 'unchecked'}>
-          <p>${b.description}</p>
+          <p>${b.description}</p><small></small>
           </li>
           <i class=" fa fa-ellipsis-v" id='${b.id}'></i>
           <i class="fa fa-trash-o" id='${b.id}'></i>          
@@ -39,7 +39,7 @@ const ShowList = ((arr) => {
 
 const addToList = (() => {
   const toDoTask = {
-    id: collection.length,
+    id: collection.length+1,
     description: document.getElementById('todotitle').value,
     completed: false,
   };
@@ -71,8 +71,16 @@ const editTask = ((ev) => {
   collection[last].description = editInput.innerHTML;
 
   editInput.addEventListener('keyup', () => {
-    collection[last].description = editInput.innerHTML;
-    localStorage.setItem('todoList', JSON.stringify(collection));
+    if(editInput.innerHTML.length > 0) {
+      collection[last].description = editInput.innerHTML;
+      localStorage.setItem('todoList', JSON.stringify(collection));
+    } else if (editInput.innerHTML.length === 0) {
+      const listItem = document.getElementById('showListItem');
+      const errorMsg = listItem.querySelector('small');
+      errorMsg.style.display = 'block';
+      errorMsg.innerText = "Please enter some text";
+      errorMsg.classList.add('small');
+    }
   });
 });
 
@@ -83,13 +91,13 @@ const removeTodo = ((ev) => {
       (x) => x.id === parseInt(buttonId, 10),
     )],
   );
-  collection = collection.map((el, id) => ({ ...el, id }));
+  collection = collection.map((el, id) => ({ ...el, id}));
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });
 
 const removeCompleted = (() => {
-  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id }));
+  collection = collection.filter((y) => !y.completed).map((y, id) => ({ ...y, id}));
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
 });

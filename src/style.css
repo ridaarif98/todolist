@@ -137,3 +137,9 @@ p {
   background: white;
   padding-top: 10px;
 }
+
+small {
+  border: 1px solid red;
+  color: red;
+  display: none;
+}
