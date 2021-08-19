@@ -125,15 +125,21 @@ p {
   padding-left: 14px;
 }
 
-/* .test {
+.test {
   border: 1px solid gainsboro;
   padding: 0 10px;
   border-radius: 6px;
   color: #666;
-} */
+}
 
 .fa-trash-o {
   display: none;
   background: white;
   padding-top: 10px;
+}
+
+small {
+  border: 1px solid red;
+  color: red;
+  display: none;
 }
