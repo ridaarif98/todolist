@@ -95,8 +95,9 @@ const removeTodo = ((ev) => {
     )],
   );
   collection = collection.map((el) => ({ ...el }));
-  for ( let i = 0; i < collection.length; i++) {
-    collection[i].index = i + 1;
+  let a = 1;
+  for (let i = 0; i < collection.length; i++) {
+    collection[i].index = i + a;
   }
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
@@ -104,8 +105,9 @@ const removeTodo = ((ev) => {
 
 const removeCompleted = (() => {
   collection = collection.filter((y) => !y.completed).map((y) => ({ ...y }));
+  let a = 1;
   for (let i = 0; i < collection.length; i++) {
-    collection[i].index = i + 1;
+    collection[i].index = i + a;
   }
   localStorage.setItem('todoList', JSON.stringify(collection));
   ShowList(collection);
