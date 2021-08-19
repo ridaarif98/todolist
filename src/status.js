@@ -39,13 +39,13 @@ const ShowList = ((arr) => {
 
 const addToList = (() => {
   const toDoTask = {
-    id : collection.length,
-    description : document.getElementById('todotitle').value,
-    completed : false,
-  }
+    id: collection.length,
+    description: document.getElementById('todotitle').value,
+    completed: false,
+  };
   collection.push(toDoTask);
   localStorage.setItem('todoList', JSON.stringify(collection));
-  if(collection.length > 0){
+  if (collection.length > 0) {
     ShowList(collection);
   }
   form.reset();
@@ -105,4 +105,6 @@ window.addEventListener('load', () => {
   }
 });
 
-export { statusCheck, addToList, editTask, removeTodo, removeCompleted } ;
+export {
+  statusCheck, addToList, editTask, removeTodo, removeCompleted,
+};
