@@ -4,12 +4,19 @@
 
 > The main purposes of the project are:
 
-- Understand how to store input data in Javascript array 
+- Understand how to store input data in Javascript class.
 - Use Form for input data.
-- Display the todo list data usind display method
+- Display the todo list data using display method
 - Style them using CSS
+- Apply drag and drop to sort the list
+- To change the status of a task check and uncheck it
+- Implement the CRUD (create, update, delete) methods. All the elements of the user interface are fully functional
 - Understand how to use webpack
 
+
+## Live View
+
+[`https://ridaarif98.github.io/todolist/dist/`](https://ridaarif98.github.io/todolist/dist/)
 
 ## Built With
 
